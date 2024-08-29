@@ -14,7 +14,7 @@ form.addEventListener('submit', (e) => {
   const propellerDiameter = calculateDiameter(length, width, weight, thrust/4); // calculate diameter based on dimensions and weight
   const propellerPitch = calculatePitch(length, width, thrust/4); // calculate pitch based on dimensions and thrust
 
-  const kv = calculateKv(thrust/4, propellerDiameter, propellerPitch, weight);
+  const kv = calculateKv(thrust, propellerDiameter, propellerPitch, weight);
 
   // Create a new URL parameter to pass the calculated weight, thrust force, and Kv rating
   const params = `weight=${weight.toFixed(2)}&thrust=${thrust.toFixed(2)}&kv=${kv.toFixed(2)}`;

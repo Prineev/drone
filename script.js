@@ -65,7 +65,7 @@ function calculateKv(thrust, propellerDiameter, propellerPitch, droneWeight) {
   const thrustPerMotor = totalThrustForce / 4;
 
   // Calculate the Kv rating based on the thrust per motor and motor speed
-  const kv = (thrustPerMotor * 1000) / (0.035 * 11000); // 0.035 kg is the motor weight, 11000 is the motor speed in rpm
+  const kv = ((thrustPerMotor * 1000) / (0.035 * 11000))*50; // 0.035 kg is the motor weight, 11000 is the motor speed in rpm
 
   return kv;
 }

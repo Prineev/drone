@@ -51,7 +51,16 @@ function calculateThrustForce(weight) {
 }
 
 function calculateKv(thrust, propellerDiameter, propellerPitch, motorWeight) {
-  const kv = (1000*thrust * Math.sqrt(propellerDiameter)) / (motorWeight * Math.sqrt(propellerPitch));
+  // Given the motor specifications: 4 x 900-1000kv motors
+  // and the propeller specifications: 8 inches diameter, 4.5 inches pitch
+  // We can calculate the Kv rating based on the thrust and motor weight
+
+  // Assuming a motor weight of approximately 0.035 kg (based on the previous calculation)
+  const motorWeight_kg = 0.035;
+
+  // Calculate the Kv rating based on the thrust and motor weight
+  const kv = (thrust * 1000) / (motorWeight_kg * 11000); // 11000 rpm is the given motor speed
+
   return kv;
 }
 

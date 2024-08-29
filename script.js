@@ -45,7 +45,7 @@ function calculateThrustForce(weight) {
   const F_total = 2 * W_newtons;
 
   // Calculate the thrust force per propeller (assuming 4 propellers)
-  const F_per_propeller = F_total / 4;
+  const F_per_propeller = F_total ;
 
   return F_per_propeller;
 }

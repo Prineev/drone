@@ -11,8 +11,8 @@ form.addEventListener('submit', (e) => {
   const weight = calculateWeight(length, breadth, width);
   const thrust = calculateThrustForce(weight);
 
-  const propellerDiameter = 5; // inches (standard value)
-  const propellerPitch = 3; // inches (standard value)
+  const propellerDiameter = calculateDiameter(length, width, weight, thrust); // calculate diameter based on dimensions and weight
+  const propellerPitch = calculatePitch(length, width, thrust); // calculate pitch based on dimensions and thrust
 
   const kv = calculateKv(thrust, propellerDiameter, propellerPitch, weight);
 
@@ -53,4 +53,45 @@ function calculateThrustForce(weight) {
 function calculateKv(thrust, propellerDiameter, propellerPitch, motorWeight) {
   const kv = (1000*thrust * Math.sqrt(propellerDiameter)) / (motorWeight * Math.sqrt(propellerPitch));
   return kv;
+}
+
+function calculatePitch(L, W, T) {
+  // Define a scaling factor to map dimension values to pitch values
+  const scaleFactor = 0.5;
+
+  // Calculate a dimension-based value (larger dimensions -> higher value)
+  const dimensionValue = Math.sqrt(L * L + W * W);
+
+  // Calculate a thrust-based value (higher thrust -> higher value)
+  const thrustValue = T / 100; // adjust the divisor to fine-tune the effect of thrust
+
+  // Combine the dimension and thrust values to get a pitch value
+  const pitchValue = scaleFactor * (dimensionValue + thrustValue);
+
+  // Map the pitch value to a range between 3 and 17
+  const pitch = Math.max(3, Math.min(17, pitchValue));
+
+  return pitch;
+}
+
+function calculateDiameter(L, W, weight, thrust) {
+  // Define a scaling factor to map dimension values to diameter values
+  const scaleFactor = 0.1;
+
+  // Calculate a dimension-based value (larger dimensions -> larger diameter)
+  const dimensionValue = Math.sqrt(L * L + W * W);
+
+  // Calculate a weight-based value (heavier weight -> larger diameter)
+  const weightValue = weight / 100; // adjust the divisor to fine-tune the effect of weight
+
+  // Calculate a thrust-based value (higher thrust -> larger diameter)
+  const thrustValue = thrust / 100; // adjust the divisor to fine-tune the effect of thrust
+
+  // Combine the dimension, weight, and thrust values to get a diameter value
+  const diameterValue = scaleFactor * (dimensionValue + weightValue + thrustValue);
+
+  // Map the diameter value to a range between 3 and 10 inches
+  const diameter = Math.max(3, Math.min(10, diameterValue));
+
+  return diameter;
 }

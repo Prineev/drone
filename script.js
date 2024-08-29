@@ -50,16 +50,22 @@ function calculateThrustForce(weight) {
   return F_per_propeller;
 }
 
-function calculateKv(thrust, propellerDiameter, propellerPitch, motorWeight) {
+function calculateKv(thrust, propellerDiameter, propellerPitch, droneWeight) {
   // Given the motor specifications: 4 x 900-1000kv motors
   // and the propeller specifications: 8 inches diameter, 4.5 inches pitch
-  // We can calculate the Kv rating based on the thrust and motor weight
+  // We can calculate the Kv rating based on the thrust, drone weight, and motor speed
 
-  // Assuming a motor weight of approximately 0.035 kg (based on the previous calculation)
-  const motorWeight_kg = 0.035;
+  // Calculate the total weight in Newtons
+  const droneWeightNewtons = (droneWeight * 9.81) / 1000;
 
-  // Calculate the Kv rating based on the thrust and motor weight
-  const kv = (thrust * 1000) / (motorWeight_kg * 11000); // 11000 rpm is the given motor speed
+  // Calculate the total thrust force required to lift the drone
+  const totalThrustForce = droneWeightNewtons * 2.4; // assuming a lifting capacity of 2.4 kg
+
+  // Calculate the thrust force per motor (assuming 4 motors)
+  const thrustPerMotor = totalThrustForce / 4;
+
+  // Calculate the Kv rating based on the thrust per motor and motor speed
+  const kv = (thrustPerMotor * 1000) / (0.035 * 11000); // 0.035 kg is the motor weight, 11000 is the motor speed in rpm
 
   return kv;
 }

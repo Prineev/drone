@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Drone Weight Calculator - Result</title>
+  <link rel="stylesheet" href="style1.css">
+  <style>
+    body {
+      color: orange;
+      font-size: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <div class="navbar">
+      <div class="icon">
+        <h2 class="logo">DRONE</h2>
+      </div>
+    </div>
+
+    <div id="result-container">
+      <p>The theoretical calculated weight of the drone is around: <span id="weight"></span> grams</p>
+      <p>The required thrust force per propeller is around: <span id="thrust"></span> N</p>
+      <p>The estimated Kv rating of the motor is around: <span id="kv"></span> KV<br><br></p>
+    </div>
+    <video width="50%" height="50%" controls="true">
+        <source src="back1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    <body>
+
+
+        <p style="vertical-align: text-bottom;"><br><br><br><br>Drone's motor orientation or layout.<br>The most common and versatile configuration of a quadcopter is in either X or + layout, which is best for most applications. The hexacopter or octocopter configuration applies to drones that need to transport heavy payloads, such as professional aerial photography rigs. These give extra stability and redundancy important for safety. While coaxial motors do exist for certain specialized designs, such as Y6 or X8 configurations, where one motor is mounted above another in an effort to achieve increased thrust within a compact frame, some drone designs include pusher configurations wherein the propellers are mounted behind the motors for certain aerodynamic advantages.</p>
+    </body>
+
+    <script>
+      // Get the weight, thrust force, and Kv rating parameters from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const weight = urlParams.get('weight');
+      const thrustForce = urlParams.get('thrust');
+      const kvRating = urlParams.get('kv');
+
+      // Display the calculated weight, thrust force, and Kv rating
+      document.getElementById('weight').innerHTML = `${weight}`;
+      document.getElementById('thrust').innerHTML = `${thrustForce}`;
+      document.getElementById('kv').innerHTML = `${kvRating}`;
+    </script>
+  </div>
+</body>
+
+
+</body>
+</html>
